@@ -23,5 +23,26 @@
     <ClInclude Include="libs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Ctarjetas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPersona.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cpasajero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCalificaciones.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CConductor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CViaje.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

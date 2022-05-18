@@ -126,3 +126,39 @@ void Lista<T>::AgregarenPosicion(T v, int pos)
 //      else mostrar(aux);
 // }
 //
+
+
+template<typename T>
+T getMax(vector<T>n) 
+{
+    T aux = n[0];
+    for_each(n.begin(), n.end(), [&](T x) {aux = x > aux ? x : aux; });
+    return aux;
+}
+
+template<typename T>
+T getMin(vector<T>n) 
+{
+    T aux = n[0];
+    for_each(n.begin(), n.end(), [&](T x) {aux = x < aux ? x : aux; });
+    return aux;
+}
+
+template<typename T>
+void printV(vector<T>n)
+{
+    for_each(n.begin(), n.end(), [](T x) {cout << x << " "; });
+}
+
+template<typename T>
+T verifyData(T limitH, T limitL)
+{
+    T dato;
+    cin >> dato;
+    if (dato<limitL || dato>limitH) {
+        cout << "Ingreso un dato equivocado";
+        cout << "\nIngreselo de nuevo: ";
+        return verifyData(limitH, limitL);
+    }
+    else return dato;
+}

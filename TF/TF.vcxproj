@@ -114,6 +114,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCalificaciones.h" />
+    <ClInclude Include="CConductor.h" />
+    <ClInclude Include="Cpasajero.h" />
+    <ClInclude Include="CPersona.h" />
+    <ClInclude Include="Ctarjetas.h" />
+    <ClInclude Include="CViaje.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="libs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
