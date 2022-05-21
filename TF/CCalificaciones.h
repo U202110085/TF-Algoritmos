@@ -23,8 +23,7 @@ private:
 CCalificaciones::CCalificaciones(Nodo<int>* pila)
 {
 	int aux;
-	lista = new Nodo<int>();
-	lista->dato = 0;
+	lista = new Nodo<int>(NULL);
 	while (pila != NULL)
 	{
 		sacarPila<int>(pila, aux);
@@ -39,7 +38,7 @@ CCalificaciones::~CCalificaciones()
 
 int CCalificaciones::getCalificacion()
 {
-	if (calificacion < 1 || calificacion>5) { return 0; }
+	if (calificacion < 1 || calificacion > 5) { return 0; }
 	return calificacion;
 }
 
@@ -66,9 +65,9 @@ void CCalificaciones::calcularCalificacion()
 	double suma = 0, num = 0;
 	while (aux != NULL)
 	{
-		if (aux->dato != 0) {
+		if (aux->valor != 0) {
 			num++;
-			suma += aux->dato;
+			suma += aux->valor;
 		}
 		aux = aux->siguiente;
 	}
@@ -77,8 +76,8 @@ void CCalificaciones::calcularCalificacion()
 
 void CCalificaciones::agregarCaificacion(int newC)
 {
-	if (lista->dato == 0) {
-		lista->dato = newC;
+	if (lista->valor == 0) {
+		lista->valor = newC;
 	}
 	else agregarLista(lista, newC);
 }

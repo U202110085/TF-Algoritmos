@@ -10,16 +10,13 @@
 
 using namespace std;
 
-template <class T>
+template<class T>
 class Nodo
 {
 public:
     T valor;
-    Nodo<T>* siguiente;
-
-public:
-    Nodo(T v, Nodo<T>* sig = NULL)
-    {
+    Nodo* siguiente;
+    Nodo(T v, Nodo* sig = NULL) {
         valor = v;
         siguiente = sig;
     }
@@ -33,68 +30,83 @@ private:
     int longitud;
 
 public:
-    Lista() { inicio = NULL; };
-    ~Lista() {};
-    void AgregaralFinal(T v);
-    void AgregaralInicio(T v);
-    void AgregarenPosicion(T v, int pos);
-    //void Mostrar(function<void(T)>);
-    Nodo<T>* getHead() { return inicio; }
+    Lista() { inicio = NULL; longitud = 0; };
+    ~Lista();
+    void insertarInicio(T v);
+    void insertarFinal(T v);
+    T obtenerPos(int pos);
+    int obtenerLongitud();
 };
 
-template <class T>
-void Lista<T>::AgregaralInicio(T v)
+template<class T>
+Lista<T>::~Lista()
 {
-    Nodo<T>* nuevo = new Nodo<T>(v);
-    if (inicio == NULL)
-    {
-        inicio = nuevo;
-        nuevo->siguiente = inicio;
+    Nodo<T>* temp;
+    while (inicio != NULL) {
+        temp = inicio;
+        inicio = inicio->siguiente;
+        delete temp;
+        temp = NULL;
     }
-    else
-    {
-        nuevo->siguiente = inicio;
-        inicio = nuevo;
-    }
-    longitud++;
+    delete inicio;
+    inicio = NULL;
 }
 
-template <class T>
-void Lista<T>::AgregaralFinal(T v)
+template<class T>
+void Lista<T>::insertarInicio(T v)
 {
-    Nodo<T>* nuevo;
-    nuevo = new Nodo<T>(v);
+    Nodo<T>* nodo = new Nodo<T>(v);
+
     if (inicio == NULL)
-    {
-        AgregaralInicio(v);
-        return;
+        inicio = nodo;
+    else {
+        nodo->siguiente = inicio;
     }
-    else
-    {
+    inicio = nodo;
+    //delete nodo;
+    nodo = NULL;
+    longitud++;
+
+}
+
+template<class T>
+void Lista<T>::insertarFinal(T v)
+{
+
+    if (inicio == NULL)
+        insertarInicio(v);
+    else {
         Nodo<T>* aux = inicio;
-        while (aux->siguiente != inicio)
-        {
+        for (int i = 0; i < longitud - 1; i++) aux = aux->siguiente;
+        Nodo<T>* nuevo = new Nodo<T>(v, aux->siguiente);
+        aux->siguiente = nuevo;
+        longitud++;
+        //CODIGO ORIGINAL: nose de q sirve el if
+        /*if (nuevo != nullptr) {
+            aux->sig = nuevo;
+            longitud++;
+        }*/
+    }
+
+}
+
+template<class T>
+T Lista<T>::obtenerPos(int pos)
+{
+    if (pos >= 0 && pos < longitud) {
+        Nodo<T>* aux = inicio;
+        for (int i = 0; i < pos; i++) {
             aux = aux->siguiente;
         }
-        aux->siguiente = nuevo;
-        nuevo->siguiente = inicio;
+        return aux->valor;
     }
+    return T{};
 }
 
-template <class T>
-void Lista<T>::AgregarenPosicion(T v, int pos)
+template<class T>
+int Lista<T>::obtenerLongitud()
 {
-    Nodo<T>* nuevo;
-    nuevo = new Nodo<T>(v);
-    int i = 1;
-    Nodo<T>* aux = inicio;
-    while (i < pos)
-    {
-        aux = aux->siguiente;
-        i++;
-    }
-    nuevo->siguiente = aux->siguiente;
-    aux->siguiente = nuevo;
+    return longitud;
 }
 
 //esta funcion de seguro se usara para mostrar los datos
@@ -153,7 +165,7 @@ void printV(vector<T>n)
 template<typename T>
 T verifyData(T limitH, T limitL)
 {
-    T dato;
+    T dato{};
     cin >> dato;
     if (dato<limitL || dato>limitH) {
         cout << "Ingreso un dato equivocado";
@@ -161,4 +173,38 @@ T verifyData(T limitH, T limitL)
         return verifyData(limitH, limitL);
     }
     else return dato;
+}
+
+
+template <class T>
+class Pila
+{
+private:
+    Nodo<T>* inicio;
+    int longitud;
+
+public:
+    Pila() { inicio = NULL; };
+    ~Pila() {};
+    void AgregaralFinal(T v);
+    void AgregaralInicio(T v);
+    void AgregarenPosicion(T v, int pos);
+    Nodo<T>* getHead() { return inicio; }
+};
+
+template<class T>
+void Pila<T>::AgregaralFinal(T v)
+{
+    Nodo<T>* nuevo = new Nodo<T>(v);
+    if (inicio == NULL)
+    {
+        inicio = nuevo;
+        nuevo->siguiente = inicio;
+    }
+    else
+    {
+        nuevo->siguiente = inicio;
+        inicio = nuevo;
+    }
+    longitud++;
 }

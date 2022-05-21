@@ -153,6 +153,7 @@ public:
 		numCalificaciones = atoi(text1.c_str());
 
 		Nodo<int>* auxPila = NULL;
+		//Pila<int>* auxPila = NULL;
 
 		for (int i = 0; i < numCalificaciones; i++)
 		{
