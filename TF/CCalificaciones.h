@@ -5,29 +5,27 @@ class CCalificaciones
 {
 public:
 	//Constructores y destructores
-	CCalificaciones(Nodo<int>*);
+	CCalificaciones(Pila<int>*);
 	~CCalificaciones();
 
 	//Metodos
 	int getCalificacion();
 	int getSizeCalificaciones();
-	Nodo<int>* getLista();
+	Lista<int>* getLista();
 	void calcularCalificacion();
 	void agregarCaificacion(int);
-	void actualizarLista(Nodo<int>*);
+	void actualizarLista(Pila<int>*);
 private:
-	Nodo<int>* lista;
+	Lista<int>* lista;
 	int calificacion;
 };
 
-CCalificaciones::CCalificaciones(Nodo<int>* pila)
+CCalificaciones::CCalificaciones(Pila<int>* pila)
 {
-	int aux;
-	lista = new Nodo<int>(NULL);
+	lista = new Lista<int>();
 	while (pila != NULL)
 	{
-		sacarPila<int>(pila, aux);
-		agregarLista<int>(lista, aux);
+		lista->push_back(pila->pop());
 	}
 	calcularCalificacion();
 }
@@ -44,52 +42,34 @@ int CCalificaciones::getCalificacion()
 
 int CCalificaciones::getSizeCalificaciones()
 {
-	Nodo<int>* aux = lista;
-	int num = 0;
-	while (aux != NULL)
-	{
-		num++;
-		aux = aux->siguiente;
-	}
-	return num;
+	return lista->obtenerLongitud();
 }
 
-Nodo<int>* CCalificaciones::getLista()
+Lista<int>* CCalificaciones::getLista()
 {
 	return lista;
 }
 
 void CCalificaciones::calcularCalificacion()
 {
-	Nodo<int>* aux = lista;
 	double suma = 0, num = 0;
-	while (aux != NULL)
+	for (int i = 0; i < lista->obtenerLongitud(); i++)
 	{
-		if (aux->valor != 0) {
-			num++;
-			suma += aux->valor;
-		}
-		aux = aux->siguiente;
+		suma += lista->obtenerPos(i);
 	}
-	calificacion = round(suma / num);
+	calificacion = round(suma / lista->obtenerLongitud());
 }
 
 void CCalificaciones::agregarCaificacion(int newC)
 {
-	if (lista->valor == 0) {
-		lista->valor = newC;
-	}
-	else agregarLista(lista, newC);
+	lista->push_back(newC);
 }
 
-void CCalificaciones::actualizarLista(Nodo<int>* pila)
+void CCalificaciones::actualizarLista(Pila<int>* pila)
 {
-	int aux;
 	while (pila != NULL)
 	{
-		sacarPila<int>(pila, aux);
-		agregarLista<int>(lista, aux);
+		lista->push_back(pila->pop());
 	}
-	lista = lista->siguiente;
 	calcularCalificacion();
 }

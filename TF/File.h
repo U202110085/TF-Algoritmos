@@ -152,8 +152,7 @@ public:
 		getline(fileRead, text1);
 		numCalificaciones = atoi(text1.c_str());
 
-		Nodo<int>* auxPila = NULL;
-		//Pila<int>* auxPila = NULL;
+		Pila<int>* auxPila = NULL;
 
 		for (int i = 0; i < numCalificaciones; i++)
 		{
@@ -164,7 +163,7 @@ public:
 			for (int j = 0; j < auxnumCalificaciones[i]; j++)
 			{
 				getline(fileRead, text1);
-				agregarPila(auxPila, atof(text1.c_str()));
+				auxPila->push(atof(text1.c_str()));
 			}
 
 			for (int j = 0; j < conductores.size(); j++)
@@ -272,14 +271,10 @@ public:
 			{
 				fileWrite << endl << var->getDNI();
 				fileWrite << endl << var->getSizeCalificacion();
-				Nodo<int>* aux = var->getCalificaciones();
-				while (aux != NULL)
+				Lista<int>* aux = var->getCalificaciones();
+				for (int i = 0; i < aux->obtenerLongitud(); i++)
 				{
-					if (aux->dato != 0)
-					{
-						fileWrite << endl << aux->dato;
-					}
-					aux = aux->siguiente;
+					fileWrite << endl << aux->obtenerPos(i);
 				}
 			}
 			auxN++;

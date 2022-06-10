@@ -6,10 +6,11 @@
 #include <functional>
 #include <algorithm>
 #include <stdlib.h>
-#include<fstream>
+#include <fstream>
 
 using namespace std;
 
+//.....:::::INICIO NODO:::::.....
 template<class T>
 class Nodo
 {
@@ -20,8 +21,14 @@ public:
         valor = v;
         siguiente = sig;
     }
+    Nodo(Nodo* temp) {
+        this->valor = temp->valor;
+        this->siguiente = temp->siguiente;
+    }
 };
+//.....:::::FIN NODO:::::.....
 
+//.....:::::INICIO LISTA:::::.....
 template <class T>
 class Lista
 {
@@ -32,12 +39,12 @@ private:
 public:
     Lista() { inicio = NULL; longitud = 0; };
     ~Lista();
-    void insertarInicio(T v);
-    void insertarFinal(T v);
+    void push_front(T v);
+    void push_back(T v);
     T obtenerPos(int pos);
     int obtenerLongitud();
+    void print();
 };
-
 template<class T>
 Lista<T>::~Lista()
 {
@@ -51,9 +58,8 @@ Lista<T>::~Lista()
     delete inicio;
     inicio = NULL;
 }
-
 template<class T>
-void Lista<T>::insertarInicio(T v)
+void Lista<T>::push_front(T v)
 {
     Nodo<T>* nodo = new Nodo<T>(v);
 
@@ -68,28 +74,20 @@ void Lista<T>::insertarInicio(T v)
     longitud++;
 
 }
-
 template<class T>
-void Lista<T>::insertarFinal(T v)
+void Lista<T>::push_back(T v)
 {
 
     if (inicio == NULL)
-        insertarInicio(v);
+        push_front(v);
     else {
         Nodo<T>* aux = inicio;
         for (int i = 0; i < longitud - 1; i++) aux = aux->siguiente;
         Nodo<T>* nuevo = new Nodo<T>(v, aux->siguiente);
         aux->siguiente = nuevo;
         longitud++;
-        //CODIGO ORIGINAL: nose de q sirve el if
-        /*if (nuevo != nullptr) {
-            aux->sig = nuevo;
-            longitud++;
-        }*/
     }
-
 }
-
 template<class T>
 T Lista<T>::obtenerPos(int pos)
 {
@@ -102,44 +100,89 @@ T Lista<T>::obtenerPos(int pos)
     }
     return T{};
 }
-
 template<class T>
 int Lista<T>::obtenerLongitud()
 {
     return longitud;
 }
+template <class T> // Uso de una funcion lambda
+void Lista<T>::print()
+{
+    function<void(T)> funcion = [](T x) {cout << x << " "; };
+    if (inicio != NULL)
+    {
+        Nodo<T>* temp = new Nodo<T>(inicio);
+        while (temp != NULL)
+        {
+            funcion(temp->valor);
+            temp = temp->siguiente;
+        }
+        cout << endl;
+    }
+    else cout << "No hay datos en la pila\n";
+}
+//.....:::::FIN LISTA:::::.....
 
-//esta funcion de seguro se usara para mostrar los datos
-//aunq de forma menos generica, donde 'funcion'
-//es lambda
-// 
-//template <class T>
-//void Lista<T>::Mostrar(function<void(T)> funcion)
-//{
-//    Nodo<T>* aux = inicio;
-//    while (aux->siguiente != inicio)
-//    {
-//        funcion();
-//        aux = aux->siguiente;
-//    }
-//    aux->valor->toString();
-//    cout << endl;
-//}
+//.....:::::INICIO PILA:::::.....
+template <class T>
+class Pila //en ingles se conoce como stack
+{
+private:
+    Nodo<T>* inicio;
+    int longitud;
 
+public:
+    Pila() { inicio = NULL; };
+    ~Pila() {};
+    void push(T v);
+    T pop();
+    Nodo<T>* getHead() { return inicio; }
+    void print();
+};
+template<class T>
+void Pila<T>::push(T v)
+{
+    Nodo<T>* nuevo = new Nodo<T>(v);
+    if (inicio == NULL)
+    {
+        inicio = nuevo;
+    }
+    else
+    {
+        nuevo->siguiente = inicio;
+        inicio = nuevo;
+    }
+    longitud++;
+}
+template<class T>
+T Pila<T>::pop()
+{
+    T aux = inicio->valor;
+	inicio = inicio->siguiente;
+	longitud--;
+	return aux;
+}
+template<class T> // Uso de una funcion lambda
+void Pila<T>::print()
+{
+    function<void(T)> funcion = [](T x) {cout << x << " "; };
+    if (inicio != NULL)
+    {
+        Nodo<T>* temp = new Nodo<T>(inicio);
+        while (temp != NULL)
+        {
+			funcion(temp->valor);
+            temp = temp->siguiente;
+        }
+        cout << endl;
+    }
+    else cout << "No hay datos en la pila\n";
+}
+//.....:::::FIN PILA:::::.....
 
-// void mostar(lista<personas>listaP){
-//      lista aux = personas;
-//      cout << listaP->personas->nombre()
-//      cout << listaP->personas->dni()
-//      cout << listaP->personas->edad()
-//      cout << endl;
-//      aux = personas->sig;
-//      if(aux==nullptr) return;
-//      else mostrar(aux);
-// }
-//
-
-
+//.....:::::FUNCIONES EXTRA:::::.....
+// Uso de 3 funciones lambda
+// Uso de 1 funcion recursiva
 template<typename T>
 T getMax(vector<T>n) 
 {
@@ -173,38 +216,4 @@ T verifyData(T limitH, T limitL)
         return verifyData(limitH, limitL);
     }
     else return dato;
-}
-
-
-template <class T>
-class Pila
-{
-private:
-    Nodo<T>* inicio;
-    int longitud;
-
-public:
-    Pila() { inicio = NULL; };
-    ~Pila() {};
-    void AgregaralFinal(T v);
-    void AgregaralInicio(T v);
-    void AgregarenPosicion(T v, int pos);
-    Nodo<T>* getHead() { return inicio; }
-};
-
-template<class T>
-void Pila<T>::AgregaralFinal(T v)
-{
-    Nodo<T>* nuevo = new Nodo<T>(v);
-    if (inicio == NULL)
-    {
-        inicio = nuevo;
-        nuevo->siguiente = inicio;
-    }
-    else
-    {
-        nuevo->siguiente = inicio;
-        inicio = nuevo;
-    }
-    longitud++;
 }

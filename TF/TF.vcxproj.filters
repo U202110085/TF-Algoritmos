@@ -44,5 +44,14 @@
     <ClInclude Include="CViaje.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBanco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
