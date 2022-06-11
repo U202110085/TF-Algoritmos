@@ -53,5 +53,17 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CAdminsitrador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CTecnico.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Administracion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CManipulacion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

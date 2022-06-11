@@ -37,12 +37,14 @@ private:
     int longitud;
 
 public:
-    Lista() { inicio = NULL; longitud = 0; };
+    Lista() { inicio = NULL; longitud = 0; }
+    Lista(Nodo<T>* a, int l) { inicio = a; longitud = l; }
     ~Lista();
     void push_front(T v);
     void push_back(T v);
     T obtenerPos(int pos);
     int obtenerLongitud();
+    Nodo<T>* obtenerNodo();
     void print();
 };
 template<class T>
@@ -105,6 +107,11 @@ int Lista<T>::obtenerLongitud()
 {
     return longitud;
 }
+template<class T>
+inline Nodo<T>* Lista<T>::obtenerNodo()
+{
+    return inicio;
+}
 template <class T> // Uso de una funcion lambda
 void Lista<T>::print()
 {
@@ -132,7 +139,7 @@ private:
     int longitud;
 
 public:
-    Pila() { inicio = NULL; };
+    Pila() { inicio = NULL; }
     ~Pila() {};
     void push(T v);
     T pop();

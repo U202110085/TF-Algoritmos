@@ -114,13 +114,17 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Administracion.h" />
+    <ClInclude Include="CAdminsitrador.h" />
     <ClInclude Include="CBanco.h" />
     <ClInclude Include="CCalificaciones.h" />
     <ClInclude Include="CConductor.h" />
     <ClInclude Include="CController.h" />
+    <ClInclude Include="CManipulacion.h" />
     <ClInclude Include="Cpasajero.h" />
     <ClInclude Include="CPersona.h" />
     <ClInclude Include="Ctarjetas.h" />
+    <ClInclude Include="CTecnico.h" />
     <ClInclude Include="CViaje.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="libs.h" />
