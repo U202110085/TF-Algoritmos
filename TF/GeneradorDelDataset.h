@@ -7,8 +7,19 @@ class DataGenerator
 {
 private:
 	ofstream file;
+	vector<string> names;
 public:
-	DataGenerator() {}
+	DataGenerator()
+	{
+		ifstream fileRead;
+		fileRead.open("nombres.txt", ios::out);
+		string line;
+		while (getline(fileRead, line))
+		{
+			names.push_back(line);
+		}
+		fileRead.close();
+	}
 	~DataGenerator() {}
 	void generateData()
 	{
@@ -26,17 +37,17 @@ public:
 	}
 	void generate(int numP, int numC)
 	{
-		file.open("pasajeros.txt", ios::out);
 		//Formato de impresion de datos
 		//1era linea es la cantidad de datos
 		//las siguientes 4 lineas son datos del pasajero
 		//  primera linea es nombre
 		//  segunda linea es edad
 		//	cuarta linea es monto q tiene en su cuenta
+		file.open("pasajeros.txt", ios::out);
 		file << numP << endl;
 		for (int i = 0; i < numP; i++)
 		{
-			file << generateName() << endl;
+			file << names[rand() % names.size()] << endl;
 			file << randomNumber(15, 90) << endl;
 			//file << generateDNI(i) << endl;
 			file << randomNumber(10, 1000) << endl;
