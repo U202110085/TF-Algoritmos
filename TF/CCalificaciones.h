@@ -67,7 +67,7 @@ void CCalificaciones::agregarCaificacion(int newC)
 
 void CCalificaciones::actualizarLista(Pila<int>* pila)
 {
-	while (pila != NULL)
+	while (NULL != pila->getHead())
 	{
 		lista->push_back(pila->pop());
 	}

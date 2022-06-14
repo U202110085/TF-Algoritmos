@@ -127,6 +127,7 @@
     <ClInclude Include="CTecnico.h" />
     <ClInclude Include="CViaje.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="GeneradorDelDataset.h" />
     <ClInclude Include="libs.h" />
     <ClInclude Include="Menu.h" />
   </ItemGroup>

@@ -52,50 +52,55 @@ void CController::agregarUsuario(File& file)
 {
 	int opcion;
 	string a1; int a2; long long a3; double a4;
-	cout << "Se encuentra en la seccion para registrarse";
+	cout << "Se encuentra en la seccion para registrarse\n";
+	cout << "Si no desea continuar ingrese 0";
 	cout << "\n\n\tDesea registrarse como:\n";
 	cout << "[1] Pasajero\n";
 	cout << "[2] Conductor\n";
 	cout << "Ingrese su opcion: ";
 	cin >> opcion;
-	std::system("CLS");
-	cout << "Ingrese su nombre: ";
-	cin.ignore();
-	getline(cin, a1);
-	cout << "Ingrese su edad: ";
-	a2 = verifyData(90, 15);
-	bool idExiste;
-	do
+	if (opcion == 1 || opcion == 2)
 	{
-		idExiste = false;
-		cout << "Ingrese su DNI: ";
-		a3 = verifyData(100000000, 9999999);
-		for each (CPasajero * var in pasajeros)
-			if (var->getDNI() == a3)
-				idExiste = true;
-		for each (CConductor * var in conductores)
-			if (var->getDNI() == a3)
-				idExiste = true;
-	} while (idExiste);
-	cout << "\n\nProcesando sus datos...\n\n";
-	for (size_t i = 0; i < 30; i++)
-	{
-		_sleep(50);
-		cout << char(219);
-	}
+		std::system("CLS");
+		cout << "Ingrese su nombre: ";
+		cin.ignore();
+		getline(cin, a1);
+		cout << "Ingrese su edad: ";
+		a2 = verifyData(90, 15);
+		bool idExiste;
+		do
+		{
+			idExiste = false;
+			cout << "Ingrese su DNI: ";
+			a3 = verifyData(100000000, 9999999);
+			for each (CPasajero * var in pasajeros)
+				if (var->getDNI() == a3)
+					idExiste = true;
+			for each (CConductor * var in conductores)
+				if (var->getDNI() == a3)
+					idExiste = true;
+		} while (idExiste);
+		cout << "\n\nProcesando sus datos...\n\n";
+		for (size_t i = 0; i < 30; i++)
+		{
+			_sleep(50);
+			cout << char(219);
+		}
 
-	if (opcion == 1)
-	{
-		pasajeros.push_back(new CPasajero(a1, a2, a3));
-		file.agregarPasajero(new CPasajero(a1, a2, a3));
-	}
-	else
-	{
-		conductores.push_back(new CConductor(a1, a2, a3));
-		file.agregarConductores(new CConductor(a1, a2, a3));
-	}
+		if (opcion == 1)
+		{
+			pasajeros.push_back(new CPasajero(a1, a2, a3));
+			file.agregarPasajero(new CPasajero(a1, a2, a3));
+		}
+		else
+		{
+			conductores.push_back(new CConductor(a1, a2, a3));
+			file.agregarConductores(new CConductor(a1, a2, a3));
+		}
 
-	cout << "\n\nSus datos se registraron con exito...\nPulse cualquier tecla para salir.";
+		cout << "\n\nSus datos se registraron con exito...\nPulse cualquier tecla para salir.";
+	}
+	else cout << "\n\nEsta regresando al menu principal\nnPulse cualquier tecla para salir.";
 	_getch();
 }
 
@@ -117,10 +122,22 @@ void CController::realizarViaje(File& file)
 	long long auxDNI;
 	bool existe = false;
 	cout << "Se encuentra en la seccion para realizar un viaje";
+	cout << "\nIngrese 0 si desea regresar al menu";
 	if (conductores.size() != 0)
 	{
 		cout << "\n\nIngrese su DNI para iniciar: ";
-		auxDNI = verifyData(100000000, 9999999);
+		cin >> auxDNI;
+		while (auxDNI < 9999999 || auxDNI > 100000000)
+		{
+			if (auxDNI == 0)
+			{
+				cout << "\n\nEsta regresando al menu principal\nPulse cualquier tecla para salir.";
+				_getch();
+				return;
+			}
+			cout << "Ingrese un DNI valido o 0 para regresar al Menu: ";
+			cin >> auxDNI;
+		}
 		for (int i = 0; i < pasajeros.size(); i++)
 		{
 			if (pasajeros[i]->getDNI() == auxDNI)
@@ -176,7 +193,7 @@ void CController::realizarViaje(File& file)
 		else
 		{
 			cout << "Lo sentimos, su DNI aun no existe en nuestra base de datos";
-			cout << "\nPorfavor dirigase a la pnatalla principal para registrarse uwu";
+			cout << "\nPorfavor dirigase a la pantalla principal para registrarse uwu";
 		}
 	}
 	else cout << "\nAun no hay conductores";
@@ -184,17 +201,24 @@ void CController::realizarViaje(File& file)
 }
 
 void CController::imprimirViajes() {
-	int num;
-	bool existe, tipo;
+	int num(0);
+	bool existe(0), tipo;
 	long long auxDNI;
 	cout << "Se encuentra en la seccion de impression de registro de viajes";
 	if (viajes.size() != 0) {
 		cout << "\n\nIngrese su DNI para iniciar: ";
-		do
+		cin >> auxDNI;
+		while (auxDNI < 9999999 || auxDNI > 100000000)
 		{
+			if (auxDNI == 0)
+			{
+				cout << "\n\nEsta regresando al menu principal\nPulse cualquier tecla para salir.";
+				_getch();
+				return;
+			}
+			cout << "Ingrese un DNI valido o 0 para regresar al Menu: ";
 			cin >> auxDNI;
-		} while (auxDNI < 9999999 || auxDNI > 100000000);
-
+		}
 		for (int i = 0; i < pasajeros.size(); i++)
 		{
 			if (pasajeros[i]->getDNI() == auxDNI)

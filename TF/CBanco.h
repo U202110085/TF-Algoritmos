@@ -36,9 +36,21 @@ void CBanco::agregarDineroTarjeta(File& file, CController*& controller)
 	long long auxDNI;
 	bool existe = false;
 	cout << "\n\tSe encuentra en la seccion para agregar dinero";
+	cout << "\n\tIngrese 0 si desea regresar al menu";
 	if (controller->getPasajeros().size() != 0) {
 		cout << "\n\nIngrese su DNI para iniciar: ";
-		auxDNI = verifyData(100000000, 9999999);
+		cin >> auxDNI;
+		while (auxDNI < 9999999 || auxDNI > 100000000)
+		{
+			if (auxDNI == 0)
+			{
+				cout << "\n\nEsta regresando al menu principal\nPulse cualquier tecla para salir.";
+				_getch();
+				return;
+			}
+			cout << "Ingrese un DNI valido o 0 para regresar al Menu: ";
+			cin >> auxDNI;
+		}
 		for (int i = 0; i < controller->getPasajeros().size(); i++)
 		{
 			if (controller->getPasajeros()[i]->getDNI() == auxDNI)
@@ -50,7 +62,7 @@ void CBanco::agregarDineroTarjeta(File& file, CController*& controller)
 		if (existe) {
 			cout << "\nHola " << controller->getPasajeros()[numP]->getName();
 			cout << "\nCual sera el monto que ingresara en su tarjeta?";
-			cout << "\nRecuerde que solo puede ingresar S/1000 por transaccion";
+			cout << "\nRecuerde que el monto que ingrese no puede superar los S/1000 por transaccion";
 			cout << "\nIngrese el monto: ";
 			montoIngresar = verifyData(1000, 0);
 			controller->getPasajeros()[numP]->getTarjeta()->agregarDinero(montoIngresar);
@@ -62,6 +74,7 @@ void CBanco::agregarDineroTarjeta(File& file, CController*& controller)
 		}
 	}
 	else cout << "\nAun no hay pasajeros registradas\nen nuestra base de datos";
+	_getch();
 }
 
 void CBanco::imprimirDatosOrdenando(CController*& controller)

@@ -1,27 +1,23 @@
 #include "libs.h"
 #include "File.h"
+#include "GeneradorDelDataset.h"
 #include "CController.h"
 #include "Administracion.h"
 #include "CBanco.h"
 #include "Menu.h"
 
-int main2()
+int main()
 {
-	Lista<CTecnico<void>*>* listaTecnicos = new Lista<CTecnico<void>*>();
-	listaTecnicos->push_back(new CTecnico<void>("Hug", 23, 12345678, 50));
-	listaTecnicos->push_back(new CTecnico<void>("Pau", 43, 88888888, 20));
-	listaTecnicos->push_back(new CTecnico<void>("Rox", 66, 77777744, 3));
+	srand(time(NULL));
 	
-	CAdministrador<void>* admin = new CAdministrador<void>("Lucas", 18, 78886182, 100);
-	Adminsitracion<void> administracion = Adminsitracion<void>(listaTecnicos);
-	administracion.mostrarAdministrador();
-	administracion.mostrarTecnicos();
-	
+	DataGenerator generate;
+	generate.generateData();
+
 	_getch();
 	return 0;
 }
 
-int main()
+int main2()
 {
 	Console::SetWindowSize(100, 18);
 	Console::CursorVisible = false;
@@ -43,7 +39,7 @@ int main()
 			printMenu(paceSetter);
 			key1 = getch();
 			if (key1 != 0xD) key2 = getch();
-			if (key2 == 72) paceSetter = 7;
+			if (key2 == 72) paceSetter = 9;
 			if (key2 == 80) paceSetter = 1;
 		case 1:
 			printMenu(paceSetter);
@@ -51,7 +47,7 @@ int main()
 			if (key1 != 0xD)
 			{
 				key2 = getch();
-				if (key2 == 72) paceSetter = 8;
+				if (key2 == 72) paceSetter = 9;
 				if (key2 == 80) paceSetter = 2;
 			}
 			else

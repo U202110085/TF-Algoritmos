@@ -152,7 +152,7 @@ public:
 		getline(fileRead, text1);
 		numCalificaciones = atoi(text1.c_str());
 
-		Pila<int>* auxPila = NULL;
+		Pila<int>* auxPila = new Pila<int>();
 
 		for (int i = 0; i < numCalificaciones; i++)
 		{

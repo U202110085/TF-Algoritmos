@@ -139,7 +139,7 @@ private:
     int longitud;
 
 public:
-    Pila() { inicio = NULL; }
+    Pila() { inicio = NULL; longitud = 0; }
     ~Pila() {};
     void push(T v);
     T pop();
@@ -164,6 +164,10 @@ void Pila<T>::push(T v)
 template<class T>
 T Pila<T>::pop()
 {
+    if (inicio == NULL)
+    {
+        return T{};
+    }
     T aux = inicio->valor;
 	inicio = inicio->siguiente;
 	longitud--;
