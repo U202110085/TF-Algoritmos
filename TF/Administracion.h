@@ -1,6 +1,7 @@
 #pragma once
 #include "CAdminsitrador.h"
 #include "CTecnico.h"
+#include "File.h"
 
 template<class T>
 class Adminsitracion
@@ -33,6 +34,11 @@ public:
 	~Adminsitracion()
 	{
 	}
+
+	//void actualizarRegistro(File& file)
+	/*{
+		
+	}*/
 
 	void addAdminstrador(CAdministrador<void>* a)
 	{

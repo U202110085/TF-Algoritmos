@@ -3,6 +3,7 @@
 #include "CPasajero.h"
 #include "CConductor.h"
 #include "CViaje.h"
+#include "Administracion.h"
 
 class File {
 private:
@@ -310,6 +311,31 @@ public:
 		fileWrite.close();
 	}
 
+	void actualizarAdmin(CAdministrador<void>* adminsitrador)
+	{
+		fileWrite.open("administrador.txt", ios::out);
+		fileWrite << adminsitrador->getName().c_str();
+		fileWrite << endl << adminsitrador->getAge();
+		fileWrite << endl << adminsitrador->getDNI();
+		fileWrite << endl << adminsitrador->getTarjeta()->getMonto();
+		fileWrite.close();
+	}
+	
+	void actualizarTecnicos(Lista<CTecnico<void>*>* tecnicos)
+	{
+		
+	}
+	
+	CAdministrador<void>* getAdmin()
+	{
+		
+	}
+	
+	Lista<CTecnico<void>*>* getTecnicos()
+	{
+		
+	}
+	
 	vector<CPasajero*> getPasajero() 
 	{
 		return pasajeros;
