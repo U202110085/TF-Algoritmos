@@ -26,11 +26,27 @@ public:
 	void calcularDatosGenerales();
 	vector<CPasajero*> getPasajeros();
 	vector<CConductor*> getConductores();
+	void setprecioV(double precio)
+	{
+		if (precio > 0)
+		{
+			precioV = precio;
+		}
+	}
+	void eraseP(int n)
+	{
+		pasajeros.erase(pasajeros.begin() + n);
+	}
+	void eraseC(int n)
+	{
+		conductores.erase(conductores.begin() + n);
+	}
 
 private:
 	vector<CPasajero*>pasajeros;
 	vector<CConductor*>conductores;
 	vector<CViaje*>viajes;
+	double precioV;
 };
 
 CController::CController()
@@ -42,6 +58,7 @@ CController::CController(vector<CPasajero*> vp, vector<CConductor*> vc, vector<C
 	pasajeros = vp;
 	conductores = vc;
 	viajes = vv;
+	precioV = 1.5;
 }
 
 CController::~CController()
@@ -162,14 +179,14 @@ void CController::realizarViaje(File& file)
 			cout << "\n\nSu opcion: ";
 			numC = verifyData<int>(conductores.size(), 1);
 			numC--;
-			cout << "El monto de su viaje saldra: s/." << double(distancia) * 1.5;
+			cout << "El monto de su viaje saldra: s/." << double(distancia) * precioV;
 			cout << "\nDesea pedir el taxi? (1 = Si, 2 = No): ";
 			confirmacion = verifyData(2, 1);
 			if (confirmacion == 1)
 			{
-				pasajeros[numP]->getTarjeta()->sacarDinero(double(distancia) * 1.5);
+				pasajeros[numP]->getTarjeta()->sacarDinero(double(distancia) * precioV);
 				if (pasajeros[numP]->getTarjeta()->seRealizoUltimaTransaccion()) {
-					viajes.push_back(new CViaje(distancia, double(distancia) * 1.5,
+					viajes.push_back(new CViaje(distancia, double(distancia) * precioV,
 						pasajeros[numP], conductores[numC]));
 					cout << "\n\nSu viaje esta en proceso\n\n";
 					for (int i = 0; i < 30; i++)
@@ -178,12 +195,12 @@ void CController::realizarViaje(File& file)
 						cout << char(219);
 					}
 					cout << "\n\nFinalizo el viaje. Gracias uwu\n";
-					file.agregarViaje(new CViaje(distancia, double(distancia) * 1.5,
+					file.agregarViaje(new CViaje(distancia, double(distancia) * precioV,
 						pasajeros[numP], conductores[numC]));
 					cout << "\nPorfavor califique su viaje del 1 al 5\n(1 siendo malo, 5 siendo muy bueno): ";
 					int auxcalificacion = verifyData(5, 1);
 					conductores[numC]->addCalificacion(auxcalificacion);
-					conductores[numC]->getTarjeta()->agregarDinero(double(distancia) * 1.5);
+					conductores[numC]->getTarjeta()->agregarDinero(double(distancia) * precioV);
 					file.actualizarDatos(pasajeros, conductores);
 					file.actualizarCalificaciones();
 				}

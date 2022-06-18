@@ -3,7 +3,8 @@
 #include "CPasajero.h"
 #include "CConductor.h"
 #include "CViaje.h"
-#include "Administracion.h"
+#include "CAdminsitrador.h"
+#include "CTecnico.h"
 
 class File {
 private:
@@ -18,15 +19,18 @@ private:
 	vector<CPasajero*> pasajeros;
 	vector<CConductor*> conductores;
 	vector<CViaje*>viajes;
+	CAdministrador<void>* admin;
+	Lista<CTecnico<void>*>* Ptecnicos;
 
 	int numPasajeros;
 	int numConductores;
 	int numViajes;
 	int numCalificaciones;
+	int numTecnicos;
 	vector<int> auxnumCalificaciones;
 
 public:
-	File() {}
+	File() { Ptecnicos = new Lista<CTecnico<void>*>(); }
 	~File() {}
 
 	void readData() 
@@ -177,7 +181,63 @@ public:
 			}
 		}
 		fileRead.close();
-	}
+		//////////////////////////////////////////////////////////////////////////////
+		fileRead.open("administrador.txt", ios::out);
+
+		if (fileRead.fail())
+		{
+			fileRead.close();
+
+			fileWrite.open("administrador.txt", ios::out);
+			fileWrite.close();
+
+			fileRead.open("administrador.txt", ios::in);
+		}
+
+		getline(fileRead, text1);
+		name = text1;
+		getline(fileRead, text2);
+		age = stoi(text2);
+		getline(fileRead, text3);
+		dni = _atoi64(text3.c_str());
+		getline(fileRead, text4);
+		monto = atof(text4.c_str());
+		getline(fileRead, text4);
+		admin = new CAdministrador<void>(name, age, dni, monto, stoi(text4));
+		
+		fileRead.close();
+		//////////////////////////////////////////////////////////////////////////////
+		fileRead.open("tecnicos.txt", ios::out);
+
+		if (fileRead.fail())
+		{
+			fileRead.close();
+
+			fileWrite.open("tecnicos.txt", ios::out);
+			fileWrite << "0";
+			fileWrite.close();
+
+			fileRead.open("tecnicos.txt", ios::in);
+		}
+
+		getline(fileRead, text1);
+		numTecnicos = atoi(text1.c_str());
+		
+		for (int i = 0; i < numTecnicos; i++)
+		{
+			getline(fileRead, text1);
+			name = text1;
+			getline(fileRead, text2);
+			age = stoi(text2);
+			getline(fileRead, text3);
+			dni = _atoi64(text3.c_str());
+			getline(fileRead, text4);
+			monto = atof(text4.c_str());
+			getline(fileRead, text4);
+			Ptecnicos->push_back(new CTecnico<void>(name, age, dni, monto, stoi(text4)));
+		}
+
+		fileRead.close(); }
 
 	void agregarPasajero(CPasajero* nP)
 	{
@@ -314,26 +374,51 @@ public:
 	void actualizarAdmin(CAdministrador<void>* adminsitrador)
 	{
 		fileWrite.open("administrador.txt", ios::out);
-		fileWrite << adminsitrador->getName().c_str();
+		fileWrite << adminsitrador->getName();
 		fileWrite << endl << adminsitrador->getAge();
 		fileWrite << endl << adminsitrador->getDNI();
 		fileWrite << endl << adminsitrador->getTarjeta()->getMonto();
+		fileWrite << endl << adminsitrador->getPassword();
 		fileWrite.close();
 	}
 	
 	void actualizarTecnicos(Lista<CTecnico<void>*>* tecnicos)
 	{
-		
+		fileWrite.open("tecnicos.txt", ios::out);
+		fileWrite << tecnicos->obtenerLongitud() << endl;
+		for (int i = 0; i < tecnicos->obtenerLongitud(); i++)
+		{
+			fileWrite << tecnicos->obtenerPos(i)->getName() << endl;
+			fileWrite << tecnicos->obtenerPos(i)->getAge() << endl;
+			fileWrite << tecnicos->obtenerPos(i)->getDNI() << endl;
+			fileWrite << tecnicos->obtenerPos(i)->getTarjeta()->getMonto() << endl;
+			fileWrite << tecnicos->obtenerPos(i)->getPassword() << endl;
+		}
+		fileWrite.close();
+	}
+
+	void eraseP(int n)
+	{
+		numPasajeros--;
+		pasajeros.erase(pasajeros.begin() + n);
+		actualizarDatos(pasajeros, conductores);
+	}
+
+	void eraseC(int n)
+	{
+		numConductores--;
+		conductores.erase(conductores.begin() + n);
+		actualizarDatos(pasajeros, conductores);
 	}
 	
 	CAdministrador<void>* getAdmin()
 	{
-		
+		return admin;
 	}
 	
 	Lista<CTecnico<void>*>* getTecnicos()
 	{
-		
+		return Ptecnicos;
 	}
 	
 	vector<CPasajero*> getPasajero() 

@@ -115,11 +115,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administracion.h" />
+    <ClInclude Include="CTrieTree.h" />
     <ClInclude Include="CAdminsitrador.h" />
     <ClInclude Include="CBanco.h" />
     <ClInclude Include="CCalificaciones.h" />
     <ClInclude Include="CConductor.h" />
     <ClInclude Include="CController.h" />
+    <ClInclude Include="CHash.h" />
     <ClInclude Include="CManipulacion.h" />
     <ClInclude Include="Cpasajero.h" />
     <ClInclude Include="CPersona.h" />

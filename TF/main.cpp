@@ -1,30 +1,26 @@
-#include "libs.h"
-#include "File.h"
 #include "GeneradorDelDataset.h"
 #include "CController.h"
-#include "Administracion.h"
 #include "CBanco.h"
 #include "Menu.h"
+#include "CManipulacion.h"
 
 int main()
 {
-	srand(time(NULL));
+
+
+	DataGenerator* dataG = new DataGenerator();
+	dataG->menu();
 	
-	DataGenerator generate;
-	generate.generateData();
-
-	_getch();
-	return 0;
-}
-
-int main2()
-{
 	Console::SetWindowSize(100, 18);
 	Console::CursorVisible = false;
 	
 	File* file = new File();
+	Hash* hashtable = new Hash();//<-----new
 	file->readData();
+	hashtable->readHash();//<-----new
 
+	CManipulacion<void> manipulacion;//<-----new
+	Adminsitracion<void>* administrador = new Adminsitracion<void>(file->getAdmin(), file->getTecnicos());//<-----new
 	CController* controller = new CController(file->getPasajero(), file->getConductores(), file->getViajes());
 	CBanco* banco = new CBanco();
 
@@ -165,16 +161,7 @@ int main2()
 			else
 			{
 				std::system("CLS");
-				// AQUI VAN LAS INSTRUCCIONES DE ADMINSTRACION
-				// 
-				// manipulacion->(bool, &file)
-				// bool es adminstracion->esAdmin();
-				// dentro del metodo manipulacion, se hace una verifiacion de q tipo de admin es
-				// es caso sea administrador, tiene dos opciones, borrar toda la base de datos 
-				// o borrar 1 solo cuenta
-				// en caso sea solo 1 tecnico entonces solo podra borrar 1 cuenta
-				// 
-				//
+				manipulacion.menu(*administrador, *file, *hashtable, *controller);
 				paceSetter = 0;
 			}
 			break;

@@ -21,6 +21,35 @@ public:
 		fileRead.close();
 	}
 	~DataGenerator() {}
+	void menu()
+	{
+		int n;
+		cout << "Antes de iniciar el programa, desea genear un dataset?" << endl;
+		cout << "1. Conservar datos existentes" << endl;
+		cout << "2. Generar uno con numeros aleatorios" << endl;
+		cout << "3. Generar uno con cantidades iguales" << endl;
+		cout << "4. Generar uno con cantidades distintas" << endl;
+		cout << "Opcion: "; cin >> n;
+		if (n == 2)
+		{
+			generateData();
+		}
+		else if (n == 3)
+		{
+			cout << "Cuantos pasajeros y conductores desea generar?" << endl;
+			cout << "Cantidad: "; cin >> n;
+			generateData(n);
+		}
+		else if (n == 4)
+		{
+			int p, c;
+			cout << "Cuantos pasajeros desea generar?" << endl;
+			cout << "Cantidad: "; cin >> p;
+			cout << "Cuantos conductores desea generar?" << endl;
+			cout << "Cantidad: "; cin >> c;
+			generateData(p, c);
+		}
+	}
 	void generateData()
 	{
 		int numeroPasajeros = rand() % 50 + 50;
@@ -37,26 +66,26 @@ public:
 	}
 	void generate(int numP, int numC)
 	{
-		//Formato de impresion de datos
-		//1era linea es la cantidad de datos
-		//las siguientes 4 lineas son datos del pasajero
-		//  primera linea es nombre
-		//  segunda linea es edad
-		//	cuarta linea es monto q tiene en su cuenta
 		file.open("pasajeros.txt", ios::out);
 		file << numP << endl;
 		for (int i = 0; i < numP; i++)
 		{
 			file << names[rand() % names.size()] << endl;
 			file << randomNumber(15, 90) << endl;
-			//file << generateDNI(i) << endl;
+			file << 100000000 + i << endl;
 			file << randomNumber(10, 1000) << endl;
 		}
-		//generador para los pasajeros
 		file.close();
 		
 		file.open("conductores.txt", ios::out);
-		//generador para los conductores
+		file << numC << endl;
+		for (int i = 0; i < numP; i++)
+		{
+			file << names[rand() % names.size()] << endl;
+			file << randomNumber(15, 90) << endl;
+			file << 100000000 + i + numP << endl;
+			file << randomNumber(10, 1000) << endl;
+		}
 		file.close();
 	}
 	string generateName()

@@ -13,9 +13,9 @@ public:
 	{
 		password = a->getPassword();
 	}
-	CAdministrador(string n, int a, long long d, double m) :CPersona(n, a, d , m)
+	CAdministrador(string n, int a, long long d, double m, int p) :CPersona(n, a, d, m)
 	{
-		password = 0;
+		password = p;
 	}
 	void setPassword(int p)
 	{

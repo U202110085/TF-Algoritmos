@@ -1,289 +1,61 @@
-96
-Paulo Ruiz
-38
-766
-Adrian Villasante
-85
-194
-Lucas Ruiz
-47
-435
-Adrian Villasante
-28
-926
-Oliver Tuesta
-55
-287
-Fabian Hidalgo
-48
-631
-Lucas Ruiz
-69
-569
-Lucas Ruiz
-16
-751
-Stevens Acha
-60
-149
-Fabian Hidalgo
-23
-952
-Leonel Ortega
-16
-107
-Fabian Hidalgo
-49
-612
-Stevens Acha
-26
-308
-Paulo Ruiz
-29
-594
-Oliver Tuesta
-56
-166
-Stevens Acha
-49
-866
-Stevens Acha
-24
-31
-Oliver Tuesta
-50
-231
-Leonel Ortega
-87
-533
-Yamile Carrasco
-63
-938
-Oliver Tuesta
-28
-948
-Fabian Hidalgo
-51
-132
-Fabian Hidalgo
-21
-796
-Oliver Tuesta
-87
-946
-Lucas Ruiz
 15
-870
-Adrian Villasante
-65
-322
-Paulo Ruiz
-51
-611
-Lucas Ruiz
-35
-47
-Adrian Villasante
-84
-293
-Lucas Ruiz
-49
-74
-Stevens Acha
-87
-365
-Yamile Carrasco
-57
-87
-Adrian Villasante
-61
-679
-Fabian Hidalgo
-29
-191
-Leonel Ortega
-89
-314
-Leonel Ortega
-83
-755
-Fabian Hidalgo
-46
-681
-Oliver Tuesta
+Mason
 90
-867
-Leonel Ortega
-31
-515
-Stevens Acha
-22
-833
-Roxana Cubillas
-35
-667
-Adrian Villasante
-69
-742
-Oliver Tuesta
-50
-358
-Stevens Acha
-66
-200
-Fabian Hidalgo
-56
-885
-Adrian Villasante
+100000000
+398
+Sophia
+32
+100000001
+869
+Avery
+37
+100000002
+215
+Dilan
+20
+100000003
+407
+Josue
 46
-585
-Roxana Cubillas
-79
-14
-Adrian Villasante
-33
-602
-Roxana Cubillas
-64
-400
-Stevens Acha
-26
-979
-Roxana Cubillas
-72
-161
-Roxana Cubillas
-18
-498
-Leonel Ortega
-26
-707
-Oliver Tuesta
-19
-662
-Paulo Ruiz
-88
-914
-Yamile Carrasco
-48
-166
-Oliver Tuesta
-46
-666
-Fabian Hidalgo
-58
-304
-Yamile Carrasco
-64
-558
-Fabian Hidalgo
-40
-701
-Stevens Acha
-56
-680
-Yamile Carrasco
-64
-397
-Lucas Ruiz
-67
-424
-Stevens Acha
-27
-170
-Adrian Villasante
-84
-949
-Stevens Acha
-34
-947
-Leonel Ortega
-55
-237
-Leonel Ortega
-88
-720
-Stevens Acha
-66
-726
-Stevens Acha
-22
-969
-Paulo Ruiz
-21
-491
-Yamile Carrasco
-33
-423
-Yamile Carrasco
-36
-441
-Yamile Carrasco
-34
-690
-Leonel Ortega
-27
-825
-Fabian Hidalgo
-52
-223
-Adrian Villasante
-73
-252
-Stevens Acha
-28
-10
-Fabian Hidalgo
-73
-477
-Oliver Tuesta
-56
-56
-Paulo Ruiz
-33
-13
-Yamile Carrasco
-42
-252
-Leonel Ortega
+100000004
 61
-358
-Yamile Carrasco
-88
-432
-Roxana Cubillas
-45
-966
-Paulo Ruiz
-63
-647
-Paulo Ruiz
-39
-199
-Paulo Ruiz
-19
-445
-Paulo Ruiz
-28
-122
-Oliver Tuesta
-25
-501
-Oliver Tuesta
-87
-550
-Oliver Tuesta
-36
-719
-Stevens Acha
-58
-173
-Adrian Villasante
-88
-974
-Leonel Ortega
-76
-128
-Leonel Ortega
-21
-412
+Gabriel
+46
+100000005
+60
+Danna
+55
+100000006
+689
+Alfredo
+41
+100000007
+163
+Zarai
+85
+100000008
+584
+Fernando
+49
+100000009
+85
+Gian
+81
+100000010
+907
+Julian
+60
+100000011
+102
+Jacob
+18
+100000012
+198
+Caleb
+66
+100000013
+37
+Noah
+24
+100000014
+836

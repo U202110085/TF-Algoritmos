@@ -9,9 +9,9 @@ private:
 	int password;
 
 public:
-	CTecnico(string n, int a, long long d, double m) :CPersona(n, a, d, m)
+	CTecnico(string n, int a, long long d, double m, int p) :CPersona(n, a, d, m)
 	{
-		password = 0;
+		password = p;
 	}
 	void setPassword(int p)
 	{

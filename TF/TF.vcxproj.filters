@@ -68,5 +68,11 @@
     <ClInclude Include="GeneradorDelDataset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CHash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrieTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
