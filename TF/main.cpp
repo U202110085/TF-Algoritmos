@@ -15,12 +15,17 @@ int main()
 	Console::CursorVisible = false;
 	
 	File* file = new File();
-	Hash* hashtable = new Hash();//<-----new
+	Hash* hashtable = new Hash();
 	file->readData();
-	hashtable->readHash();//<-----new
+	hashtable->readHash();
 
-	CManipulacion<void> manipulacion;//<-----new
-	Adminsitracion<void>* administrador = new Adminsitracion<void>(file->getAdmin(), file->getTecnicos());//<-----new
+	CManipulacion<void> manipulacion;
+	Adminsitracion<void>* administrador;
+	if (file->getAdmin() == NULL)
+	{
+		administrador = new Adminsitracion<void>(file->getTecnicos());
+	}
+	else administrador = new Adminsitracion<void>(file->getAdmin(), file->getTecnicos());
 	CController* controller = new CController(file->getPasajero(), file->getConductores(), file->getViajes());
 	CBanco* banco = new CBanco();
 

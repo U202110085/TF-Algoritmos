@@ -30,7 +30,7 @@ private:
 	vector<int> auxnumCalificaciones;
 
 public:
-	File() { Ptecnicos = new Lista<CTecnico<void>*>(); }
+	File() { Ptecnicos = new Lista<CTecnico<void>*>(); admin = NULL; }
 	~File() {}
 
 	void readData() 
@@ -194,7 +194,19 @@ public:
 			fileRead.open("administrador.txt", ios::in);
 		}
 
-		getline(fileRead, text1);
+		while (getline(fileRead, text1))
+		{
+			name = text1;
+			getline(fileRead, text2);
+			age = stoi(text2);
+			getline(fileRead, text3);
+			dni = _atoi64(text3.c_str());
+			getline(fileRead, text4);
+			monto = atof(text4.c_str());
+			getline(fileRead, text4);
+			admin = new CAdministrador<void>(name, age, dni, monto, stoi(text4));
+		}
+		/*getline(fileRead, text1);
 		name = text1;
 		getline(fileRead, text2);
 		age = stoi(text2);
@@ -203,7 +215,7 @@ public:
 		getline(fileRead, text4);
 		monto = atof(text4.c_str());
 		getline(fileRead, text4);
-		admin = new CAdministrador<void>(name, age, dni, monto, stoi(text4));
+		admin = new CAdministrador<void>(name, age, dni, monto, stoi(text4));*/
 		
 		fileRead.close();
 		//////////////////////////////////////////////////////////////////////////////
@@ -373,13 +385,16 @@ public:
 
 	void actualizarAdmin(CAdministrador<void>* adminsitrador)
 	{
-		fileWrite.open("administrador.txt", ios::out);
-		fileWrite << adminsitrador->getName();
-		fileWrite << endl << adminsitrador->getAge();
-		fileWrite << endl << adminsitrador->getDNI();
-		fileWrite << endl << adminsitrador->getTarjeta()->getMonto();
-		fileWrite << endl << adminsitrador->getPassword();
-		fileWrite.close();
+		if (adminsitrador != NULL)
+		{
+			fileWrite.open("administrador.txt", ios::out);
+			fileWrite << adminsitrador->getName();
+			fileWrite << endl << adminsitrador->getAge();
+			fileWrite << endl << adminsitrador->getDNI();
+			fileWrite << endl << adminsitrador->getTarjeta()->getMonto();
+			fileWrite << endl << adminsitrador->getPassword();
+			fileWrite.close();
+		}
 	}
 	
 	void actualizarTecnicos(Lista<CTecnico<void>*>* tecnicos)

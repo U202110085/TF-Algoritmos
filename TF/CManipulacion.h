@@ -89,17 +89,17 @@ public:
 				file.eraseP(n);
 				controller.eraseP(n);
 			}
-			else if(n < file.getPasajero().size() + file.getConductores().size())
+			else if (n < file.getPasajero().size() + file.getConductores().size())
 			{
 				file.eraseC(n - file.getPasajero().size());
 				controller.eraseC(n - controller.getPasajeros().size());
 			}
-			else cout<<"No existe usuario en ese indice";
+			else cout << "No existe usuario en ese indice";
 			cout << "\nPulse cualquier tecla para continuar"; _getch();
 		}
 		else
 		{
-			cout << "No tiene permisos para eliminar un usuario" << endl;
+			cout << "\nNo tiene permisos para borrar usuarios o no existe un adminsitrador" << endl;
 			cout << "Pulse cualquier tecla para continuar";
 			_getch();
 		}
@@ -129,7 +129,7 @@ public:
 		}
 		else
 		{
-			cout << "No tiene permisos para cambiar el precio" << endl;
+			cout << "\nNo tiene permisos para cambiar el precio o no existe un adminsitrador" << endl;
 			cout << "Pulse cualquier tecla para continuar";
 			_getch();
 		}
@@ -178,7 +178,7 @@ public:
 		}
 		else
 		{
-			cout << "No tiene permisos para cambiar el precio" << endl;
+			cout << "\nNo tiene permisos o no existe un adminsitrador\n" << endl;
 			cout << "Pulse cualquier tecla para continuar";
 			_getch();
 		}
