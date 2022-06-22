@@ -4,9 +4,14 @@
 
 void miniMenu();
 void printData(vector<CPersona*>);
-void bubbleSort(vector<CPersona*>&, bool);
 void insertionSort(vector<CPersona*>&, bool);
 void selectionSort(vector<CPersona*>&);
+template<class T>
+void quicksort(vector<T>&, int, int, function<bool(T, T)>);
+template <class T>
+void heapify(vector<T>&, int, int, function<bool(T, T)>);
+template <class T>
+void heapSort(vector<T>&, int, function<bool(T, T)>);
 
 class CBanco
 {
@@ -82,6 +87,23 @@ void CBanco::imprimirDatosOrdenando(CController*& controller)
 	int opcion;
 	bool sigue = true;
 
+	auto mayorA = [](CPersona* p1, CPersona* p2)
+	{
+		return p1->getAge() < p2->getAge();
+	};
+	auto menorA = [](CPersona* p1, CPersona* p2) -> bool
+	{
+		return p1->getAge() > p2->getAge();
+	};
+	auto mayorD = [](CPersona* p1, CPersona* p2) -> bool
+	{
+		return p1->getTarjeta()->getMonto() < p2->getTarjeta()->getMonto();
+	};
+	auto menorD = [](CPersona* p1, CPersona* p2) -> bool
+	{
+		return p1->getTarjeta()->getMonto() > p2->getTarjeta()->getMonto();
+	};
+
 	if (controller->getPasajeros().size() != 0 && controller->getConductores().size() != 0) {
 		vector<CPersona*> personas;
 		for each (CPasajero * var in controller->getPasajeros()) { personas.push_back(var); }
@@ -101,16 +123,16 @@ void CBanco::imprimirDatosOrdenando(CController*& controller)
 				printData(personas);
 				break;
 			case 2:
-				bubbleSort(personas, true);
+				quicksort<CPersona*>(personas, 0, personas.size() - 1, mayorA);
 				break;
 			case 3:
-				bubbleSort(personas, false);
+				quicksort<CPersona*>(personas, 0, personas.size() - 1, menorA);
 				break;
 			case 4:
-				insertionSort(personas, true);
+				heapSort<CPersona*>(personas, personas.size(), mayorD);
 				break;
 			case 5:
-				insertionSort(personas, false);
+				heapSort<CPersona*>(personas, personas.size(), menorD);
 				break;
 			case 6:
 				selectionSort(personas);
@@ -151,32 +173,6 @@ void printData(vector<CPersona*> personas) {
 		cout << "Edad: " << var->getAge() << endl;
 		cout << "DNI: " << var->getDNI() << endl;
 		cout << "Monto En Tarjeta: " << var->getTarjeta()->getMonto() << endl;
-	}
-}
-
-void bubbleSort(vector<CPersona*>& people, bool ascending) {
-	CPersona* aux;
-	if (ascending) {
-		for (int i = 0; i < people.size(); i++) {
-			for (int j = 0; j < people.size() - 1; j++) {
-				if (people[j]->getAge() > people[j + 1]->getAge()) {
-					aux = people[j];
-					people[j] = people[j + 1];
-					people[j + 1] = aux;
-				}
-			}
-		}
-	}
-	else {
-		for (int i = 0; i < people.size(); i++) {
-			for (int j = 0; j < people.size() - 1; j++) {
-				if (people[j]->getAge() < people[j + 1]->getAge()) {
-					aux = people[j];
-					people[j] = people[j + 1];
-					people[j + 1] = aux;
-				}
-			}
-		}
 	}
 }
 
@@ -226,5 +222,64 @@ void selectionSort(vector<CPersona*>& personas) {
 		aux = personas[i];
 		personas[i] = personas[min];
 		personas[min] = aux;
+	}
+}
+
+template<class T>
+void quicksort(vector<T>& people, int inicio, int tamano, function<bool(T, T)> func) {
+	int i = inicio;
+	int j = tamano;
+	T pivot = people[(i + j) / 2];
+	do
+	{
+		while (func(people[i], pivot) && (j <= tamano))
+		{
+			i++;
+		}
+		while (func(pivot, people[j]) && (j > inicio))
+		{
+			j--;
+		}
+		if (i <= j) {
+			swap(people[i], people[j]);
+			i++; j--;
+		}
+	} while (i <= j);
+	if (inicio < j) {
+		quicksort(people, inicio, j, func);
+	}
+	if (i < tamano) {
+		quicksort(people, i, tamano, func);
+	}
+}
+
+template <class T>
+void heapify(vector<T>& arr, int n, int i, function<bool(T, T)> func)
+{
+
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if (l < n && func(arr[l], arr[largest]))
+		largest = l;
+	if (r < n && func(arr[r], arr[largest]))
+		largest = r;
+	if (largest != i)
+	{
+		swap(arr[i], arr[largest]);
+		heapify(arr, n, largest, func);
+	}
+}
+
+template <class T>
+void heapSort(vector<T>& arr, int n, function<bool(T, T)> func)
+{
+
+	for (int i = arr.size() / 2 - 1; i >= 0; i--)
+		heapify(arr, arr.size(), i, func);
+	for (int i = arr.size() - 1; i > 0; i--)
+	{
+		swap(arr[0], arr[i]);
+		heapify(arr, i, 0, func);
 	}
 }
