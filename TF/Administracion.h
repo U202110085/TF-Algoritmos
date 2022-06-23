@@ -132,6 +132,7 @@ public:
 		}
 		hashtable.addHash(password);
 		cout << "Se registro con exito\nPulse cualquier tecla para salir.";
+		_getch();
 		actualizarRegistro(file);
 	}
 

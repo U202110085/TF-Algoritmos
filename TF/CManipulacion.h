@@ -9,7 +9,7 @@ class CManipulacion
 public:
 	CManipulacion(){}
 	~CManipulacion(){}
-	void menu(Adminsitracion<void> administracion, File& file, Hash& hashtable, CController& controller)
+	void menu(Adminsitracion<void>& administracion, File& file, Hash& hashtable, CController& controller)
 	{
 		int opcion;
 		system("CLS");
@@ -46,15 +46,15 @@ public:
 		}
 		menu(administracion, file, hashtable, controller);
 	}
-	bool esAdministrador(Adminsitracion<void> administracion, File& file, Hash& hashtable)
+	bool esAdministrador(Adminsitracion<void>& administracion, File& file, Hash& hashtable)
 	{
 		return administracion.esAdmin(file, hashtable);
 	}
-	void agregarAdmin(Adminsitracion<void> administracion, File& file, Hash& hashtable)
+	void agregarAdmin(Adminsitracion<void>& administracion, File& file, Hash& hashtable)
 	{
 		administracion.add(file, hashtable);
 	}
-	void eliminarUsuario(Adminsitracion<void> administracion, File& file, Hash& hashtable, CController& controller)
+	void eliminarUsuario(Adminsitracion<void>& administracion, File& file, Hash& hashtable, CController& controller)
 	{
 		int n;
 		if (administracion.esAdmin(file, hashtable))
@@ -104,7 +104,7 @@ public:
 			_getch();
 		}
 	}
-	void cambiarPrecio(Adminsitracion<void> administracion, File& file, Hash& hashtable, CController& controller)
+	void cambiarPrecio(Adminsitracion<void>& administracion, File& file, Hash& hashtable, CController& controller)
 	{
 		double n;
 		if (administracion.esAdmin(file, hashtable))
@@ -134,7 +134,7 @@ public:
 			_getch();
 		}
 	}
-	void borrarArchivos(Adminsitracion<void> administracion, Hash& hashtable, CController& controller)
+	void borrarArchivos(Adminsitracion<void>& administracion, Hash& hashtable, CController& controller)
 	{
 		if (administracion.mainAdmin())
 		{
