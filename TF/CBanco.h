@@ -4,14 +4,16 @@
 
 void miniMenu();
 void printData(vector<CPersona*>);
-void insertionSort(vector<CPersona*>&, bool);
-void selectionSort(vector<CPersona*>&);
 template<class T>
 void quicksort(vector<T>&, int, int, function<bool(T, T)>);
 template <class T>
 void heapify(vector<T>&, int, int, function<bool(T, T)>);
 template <class T>
 void heapSort(vector<T>&, int, function<bool(T, T)>);
+template<class T>
+void merge(vector<T>&, int, int, int, function<bool(T, T)>);
+template<class T>
+void mergeSort(vector<T>&, int, int, function<bool(T, T)>);
 
 class CBanco
 {
@@ -103,6 +105,10 @@ void CBanco::imprimirDatosOrdenando(CController*& controller)
 	{
 		return p1->getTarjeta()->getMonto() > p2->getTarjeta()->getMonto();
 	};
+	auto nameSort = [](CPersona* m1, CPersona* m2)
+	{
+		return m1->getName() <= m2->getName();
+	};
 
 	if (controller->getPasajeros().size() != 0 && controller->getConductores().size() != 0) {
 		vector<CPersona*> personas;
@@ -135,7 +141,7 @@ void CBanco::imprimirDatosOrdenando(CController*& controller)
 				heapSort<CPersona*>(personas, personas.size(), menorD);
 				break;
 			case 6:
-				selectionSort(personas);
+				mergeSort<CPersona*>(personas, 0, personas.size() - 1, nameSort);
 				break;
 			case 7:
 				sigue = false;
@@ -173,55 +179,6 @@ void printData(vector<CPersona*> personas) {
 		cout << "Edad: " << var->getAge() << endl;
 		cout << "DNI: " << var->getDNI() << endl;
 		cout << "Monto En Tarjeta: " << var->getTarjeta()->getMonto() << endl;
-	}
-}
-
-void insertionSort(vector<CPersona*>& personas, bool ascending) {
-	int pos;
-	CPersona* aux;
-	if (ascending) {
-		for (int i = 0; i < personas.size(); i++) {
-			pos = i;
-			aux = personas[i];
-
-			//evaluamos si es mayor a la primera posición, numero de la inzquierda es mayor al numero actual
-			while ((pos > 0) && (personas[pos - 1]->getTarjeta()->getMonto() < aux->getTarjeta()->getMonto())) {
-				personas[pos] = personas[pos - 1];
-				pos--;
-			}
-			personas[pos] = aux;
-		}
-	}
-	else {
-		for (int i = 0; i < personas.size(); i++) {
-			pos = i;
-			aux = personas[i];
-
-			//evaluamos si es mayor a la primera posición, numero de la inzquierda es mayor al numero actual
-			while ((pos > 0) && (personas[pos - 1]->getTarjeta()->getMonto() > aux->getTarjeta()->getMonto())) {
-				personas[pos] = personas[pos - 1];
-				pos--;
-			}
-			personas[pos] = aux;
-		}
-	}
-}
-
-void selectionSort(vector<CPersona*>& personas) {
-	int min;
-	CPersona* aux;
-	for (int i = 0; i < personas.size() - 1; i++) {
-		//suponemos que le numero menor esta en la primera posición
-		min = i;
-		for (int j = i + 1; j < personas.size(); j++) {
-			//buscando cual es el menor numero
-			if (personas[j]->getName() < personas[min]->getName()) {
-				min = j;
-			}
-		}
-		aux = personas[i];
-		personas[i] = personas[min];
-		personas[min] = aux;
 	}
 }
 
@@ -281,5 +238,61 @@ void heapSort(vector<T>& arr, int n, function<bool(T, T)> func)
 	{
 		swap(arr[0], arr[i]);
 		heapify(arr, i, 0, func);
+	}
+}
+
+template<class T>
+void merge(vector<T>& people, int inicio, int mitad, int final, function<bool(T, T)> func) {
+	int i, j, k;
+	int elementosIzq = mitad - inicio + 1;
+	int elementosDer = final - mitad;
+
+	vector<T>izquierda(elementosIzq);
+	vector<T>derecha(elementosDer);
+
+	for (int i = 0; i < elementosIzq; i++) {
+		izquierda[i] = people[inicio + i];
+	}
+	for (int j = 0; j < elementosDer; j++) {
+		derecha[j] = people[mitad + 1 + j];
+	}
+
+	i = 0;
+	j = 0;
+	k = inicio;
+
+	while (i < elementosIzq && j < elementosDer) {
+		if (func(izquierda[i], derecha[j])) {
+			people[k] = izquierda[i];
+			i++;
+		}
+		else {
+			people[k] = derecha[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (j < elementosDer) {
+		people[k] = derecha[j];
+		j++;
+		k++;
+	}
+
+	while (i < elementosIzq) {
+		people[k] = izquierda[i];
+		i++;
+		k++;
+	}
+
+}
+
+template<class T>
+void mergeSort(vector<T>& arreglo, int inicio, int final, function<bool(T, T)> func) {
+	if (inicio < final) {
+		int mitad = inicio + (final - inicio) / 2;
+		mergeSort(arreglo, inicio, mitad, func);
+		mergeSort(arreglo, mitad + 1, final, func);
+		merge(arreglo, inicio, mitad, final, func);
 	}
 }
