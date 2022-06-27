@@ -40,8 +40,11 @@ int main()
 			printMenu(paceSetter);
 			key1 = getch();
 			if (key1 != 0xD) key2 = getch();
-			if (key2 == 72) paceSetter = 9;
-			if (key2 == 80) paceSetter = 1;
+			if (key2 == 72) 
+				paceSetter = 9;
+			if (key2 == 80) 
+				paceSetter = 1;
+			break;
 		case 1:
 			printMenu(paceSetter);
 			key1 = getch();

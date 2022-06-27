@@ -162,8 +162,8 @@ void miniMenu() {
 	cout << "\nSe podra imprimir esa informacion y tambien ordenar";
 	cout << "\nde distintas formas";
 	cout << "\n\n[1] Imprimir datos";
-	cout << "\n[2] Ordenar las personas de mayor a menor por edad";
-	cout << "\n[3] Ordenar las personas de menor a mayor por edad";
+	cout << "\n[2] Ordenar las personas de menor a mayor por edad";
+	cout << "\n[3] Ordenar las personas de mayor a menor por edad";
 	cout << "\n[4] Ordenar las personas de mas rico o menos rico";
 	cout << "\n[5] Ordenar las personas de menos rico o mas rico";
 	cout << "\n[6] Ordenar las personas alfabeticamente";

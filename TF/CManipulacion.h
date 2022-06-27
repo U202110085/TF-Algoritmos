@@ -69,7 +69,7 @@ public:
 				i < file.getConductores().size() + file.getPasajero().size();
 				i++)
 			{
-				cout << "[" << i << "] " << file.getConductores()[i]->getName() << endl;
+				cout << "[" << i << "] " << file.getConductores()[i - file.getPasajero().size()]->getName() << endl;
 			}
 			cout << "\nIngrese el indice del Usuario que desea eliminar: "; cin >> n;
 			system("CLS");
